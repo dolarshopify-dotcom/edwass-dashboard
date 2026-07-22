@@ -1,56 +1,35 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>متجري الإلكتروني</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-<header>
-  <h1>🛍️ متجري الإلكتروني</h1>
+<header class="hero">
+    <h1>عرض المناشف القطنية</h1>
+    <p class="offer">🔥 عرض خاص لفترة محدودة</p>
 </header>
 
-<main>
-  <div class="product">
-    <h2>هاتف ذكي</h2>
-    <p>السعر: 500 دولار</p>
-    <button>أضف إلى السلة</button>
-  </div>
+<section class="product">
 
-  <div class="product">
-    <h2>ساعة ذكية</h2>
-    <p>السعر: 120 دولار</p>
-    <button>أضف إلى السلة</button>
-  </div>
+    <img src="images/product1.jpg" alt="المناشف" class="main-image">
 
-  <div class="product">
-    <h2>سماعات لاسلكية</h2>
-    <p>السعر: 80 دولار</p>
-    <button>أضف إلى السلة</button>
-  </div>
-</main>
-<form id="orderForm">
-    <input type="text" placeholder="الاسم الكامل" required>
-    <input type="tel" placeholder="رقم الهاتف" required>
+    <div class="gallery">
+        <img src="images/product1.jpg">
+        <img src="images/product2.jpg">
+        <img src="images/product3.jpg">
+        <img src="images/product4.jpg">
+    </div>
 
-    <select id="wilaya" required>
-        <option value="">اختر الولاية</option>
-        <option value="الجزائر">الجزائر</option>
-        <option value="وهران">وهران</option>
-        <option value="سطيف">سطيف</option>
-        <option value="قسنطينة">قسنطينة</option>
-    </select>
+    <h2>عرض المناشف القطنية</h2>
 
-    <input type="text" placeholder="البلدية" required>
-    <input type="text" placeholder="العنوان الكامل" required>
+    <div class="prices">
+        <div class="price-box active">
+            <h3>6 قطع</h3>
+            <span>1600 دج</span>
+        </div>
 
-    <p>سعر التوصيل: <span id="deliveryPrice">0</span> دج</p>
+        <div class="price-box">
+            <h3>12 قطعة</h3>
+            <span>2500 دج</span>
+        </div>
+    </div>
 
-    <button type="submit">تأكيد الطلب</button>
-</form>
-<script src="script.js"></script>
+    <a href="#orderForm" class="buy-btn">
+        اطلب الآن
+    </a>
 
-</body>
-</html>
+</section>
