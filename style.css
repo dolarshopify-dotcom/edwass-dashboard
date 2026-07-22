@@ -41,3 +41,49 @@ button {
 button:hover {
     background: #218838;
 }
+#orderForm{
+  max-width:400px;
+  margin:20px auto;
+  padding:20px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  background:#fff;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+#orderForm input,
+#orderForm select{
+  padding:10px;
+  border:1px solid #ccc;
+  border-radius:5px;
+}
+
+#orderForm button{
+  background:#28a745;
+  color:#fff;
+  padding:12px;
+  border:none;
+  border-radius:5px;
+  cursor:pointer;
+}
+
+#orderForm button:hover{
+  background:#218838;
+}
+#orderForm input,
+#orderForm select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#orderForm button {
+    background: #28a745;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
