@@ -1,35 +1,21 @@
-<header class="hero">
-    <h1>عرض المناشف القطنية</h1>
-    <p class="offer">🔥 عرض خاص لفترة محدودة</p>
-</header>
-
-<section class="product">
-
-    <img src="images/product1.jpg" alt="المناشف" class="main-image">
-
-    <div class="gallery">
-        <img src="images/product1.jpg">
-        <img src="images/product2.jpg">
-        <img src="images/product3.jpg">
-        <img src="images/product4.jpg">
-    </div>
-
-    <h2>عرض المناشف القطنية</h2>
-
-    <div class="prices">
-        <div class="price-box active">
-            <h3>6 قطع</h3>
-            <span>1600 دج</span>
+<section class="order-section" id="checkout">
+    <h2>اطلب الآن - الدفع عند الاستلام</h2>
+    <form class="order-form">
+        <div class="form-group">
+            <label for="fullname">الاسم الكامل</label>
+            <input type="text" id="fullname" name="fullname" placeholder="أدخل اسمك الكامل هنا" required>
         </div>
-
-        <div class="price-box">
-            <h3>12 قطعة</h3>
-            <span>2500 دج</span>
+        
+        <div class="form-group">
+            <label for="phone">رقم الهاتف</label>
+            <input type="tel" id="phone" name="phone" placeholder="أدخل رقم هاتفك للتواصل معك" required>
         </div>
-    </div>
-
-    <a href="#orderForm" class="buy-btn">
-        اطلب الآن
-    </a>
-
+        
+        <div class="form-group">
+            <label for="address">العنوان أو الولاية/المدينة</label>
+            <input type="text" id="address" name="address" placeholder="أدخل عنوانك بالتفصيل" required>
+        </div>
+        
+        <button type="submit" class="submit-btn">تأكيد الطلب الآن</button>
+    </form>
 </section>
