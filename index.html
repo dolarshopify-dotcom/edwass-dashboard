@@ -1,39 +1,5 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EDWASS - متجرنا الإلكتروني</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
 
-    <!-- شعار المتجر في الأعلى -->
-    <header class="store-header">
-        <h1 class="logo">EDWASS</h1>
-    </header>
-
-    <section class="product">
-        <img src="images/photo_2025-12-13_23-10-19.jpg" alt="صورة المنتج الرئيسي" class="main-image">
-        
-        <div class="gallery">
-            <img src="images/photo_2025-12-13_23-10-19.jpg" alt="صورة 1">
-            <img src="images/photo_2025-12-13_23-10-27.jpg" alt="صورة 2">
-            <img src="images/photo_2025-12-13_23-10-32.jpg" alt="صورة 3">
-            <img src="images/photo_2025-12-13_23-17-36-42.jpg" alt="صورة 4">
-        </div>
-
-        <h2>مميزات المنتج</h2>
-        <p>اكتب هنا باختصار مميزات وفوائد هذا المنتج وكيف سيحل المشكلة للعميل.</p>
-        
-        <div class="prices">
-            <div class="price-box">
-                <span>السعر: 3500 دج</span>
-            </div>
-        </div>
-    </section>
-
-    <section class="order-section" id="checkout">
+<section class="order-section" id="checkout">
         <h2>أدخل معلوماتك لتأكيد الطلب</h2>
         <form class="order-form">
             <div class="form-group">
@@ -115,11 +81,34 @@
                 <label for="address">العنوان التفصيلي (البلدية والحي) *</label>
                 <input type="text" id="address" name="address" placeholder="أدخل العنوان بالتفصيل" required>
             </div>
+
+            <!-- خيارات التوصيل -->
+            <div class="form-group">
+                <label>طريقة التوصيل *</label>
+                <div class="delivery-options">
+                    <label class="delivery-card">
+                        <input type="radio" name="delivery_type" value="home" checked>
+                        <div class="delivery-info">
+                            <span>توصيل للمنزل (الدايركشن)</span>
+                            <span class="delivery-price">600 دج</span>
+                        </div>
+                    </label>
+                    <label class="delivery-card">
+                        <input type="radio" name="delivery_type" value="desk">
+                        <div class="delivery-info">
+                            <span>توصيل للمكتب (Stop Desk)</span>
+                            <span class="delivery-price">400 دج</span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- عرض السعر الإجمالي -->
+            <div class="total-box">
+                <span>المجموع الإجمالي:</span>
+                <span id="total-price">4100 دج</span>
+            </div>
             
             <button type="submit" class="submit-btn">تأكيد طلب المنتج 🛒</button>
         </form>
     </section>
-
-    <script src="script.js"></script>
-</body>
-</html>
