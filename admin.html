@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>لوحة تحكم المتجر - Edwass Admin</title>
-    <link rel="stylesheet" href="style.css">
     <style>
-        body { background: #f4f6f8; font-family: Tahoma, sans-serif; padding: 20px; }
+        body { background: #f4f6f8; font-family: Tahoma, sans-serif; padding: 20px; direction: rtl; }
         .admin-container { max-width: 900px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
         h2 { color: #333; border-bottom: 2px solid #eee; padding-bottom: 10px; }
-        .form-group { margin-bottom: 15px; }
+        .form-group { margin-bottom: 15px; text-align: right; }
         label { display: block; margin-bottom: 5px; font-weight: bold; }
-        input { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; }
+        input { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
         button { background: #2f855a; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-size: 16px; }
         table { width: 100%; border-collapse: collapse; margin-top: 20px; }
         th, td { border: 1px solid #ddd; padding: 10px; text-align: center; }
@@ -63,7 +62,7 @@
     // تحميل الإعدادات الحالية في الحقول
     let settings = JSON.parse(localStorage.getItem('store_settings')) || {
         productName: "EDWASS - Hoodie Pro",
-        productPrice: 4100,
+        productPrice: 3500,
         homeDeliveryPrice: 600,
         stopDeskPrice: 400
     };
@@ -73,16 +72,17 @@
     document.getElementById('admin-home').value = settings.homeDeliveryPrice;
     document.getElementById('admin-stop').value = settings.stopDeskPrice;
 
-    // حفظ الإعدادات الجديدة
+    // حفظ الإعدادات الجديدة بالشكل الصحيح
     document.getElementById('settings-form').addEventListener('submit', (e) => {
         e.preventDefault();
         settings.productName = document.getElementById('admin-name').value;
-        settings.price = Number(document.getElementById('admin-price').value);
+        settings.productPrice = Number(document.getElementById('admin-price').value);
         settings.homeDeliveryPrice = Number(document.getElementById('admin-home').value);
         settings.stopDeskPrice = Number(document.getElementById('admin-stop').value);
         
         localStorage.setItem('store_settings', JSON.stringify(settings));
-        alert("تم حفظ الإعدادات بنجاح!");
+        alert("تم حفظ التغييرات وتحديث المتجر بنجاح!");
+        window.location.reload();
     });
 
     // عرض الطلبات
