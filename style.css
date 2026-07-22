@@ -1,177 +1,140 @@
-body {
-    font-family: Tahoma, sans-serif;
-    background-color: #f8fafc;
-    margin: 0;
-    padding: 10px;
+.checkout-card {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    padding: 25px;
+    max-width: 480px;
+    margin: 30px auto;
     direction: rtl;
-    color: #1e293b;
+    font-family: 'Tahoma', sans-serif;
+    border: 1px solid #e5e7eb;
 }
 
-.store-header {
-    background-color: #ffffff;
-    padding: 15px;
+.checkout-header h2 {
+    color: #111827;
+    font-size: 20px;
     text-align: center;
-    border-radius: 12px;
-    margin-bottom: 15px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    margin-bottom: 8px;
 }
 
-.store-header .logo {
-    font-size: 28px;
-    font-weight: 900;
-    color: #0f172a;
-    letter-spacing: 4px;
-    margin: 0;
-}
-
-.product {
-    background: #fff;
-    padding: 15px;
-    border-radius: 12px;
-    margin-bottom: 15px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+.checkout-header p {
+    color: #6b7280;
+    font-size: 13px;
     text-align: center;
-}
-
-.main-image {
-    width: 100%;
-    max-height: 350px;
-    object-fit: cover;
-    border-radius: 8px;
-}
-
-.gallery {
-    display: flex;
-    gap: 8px;
-    margin: 10px 0;
-    justify-content: center;
-}
-
-.gallery img {
-    width: 60px;
-    height: 60px;
-    object-fit: cover;
-    border-radius: 6px;
-    border: 1px solid #cbd5e1;
-}
-
-.order-section {
-    background: #fff;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-}
-
-.order-section h2 {
-    font-size: 18px;
-    margin-bottom: 15px;
-    color: #0f172a;
-    text-align: right;
+    margin-bottom: 20px;
 }
 
 .form-group {
-    margin-bottom: 15px;
-    text-align: right;
+    margin-bottom: 16px;
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 6px;
     font-weight: bold;
+    color: #374151;
     font-size: 14px;
-    color: #334155;
+}
+
+.required {
+    color: #ef4444;
 }
 
 .form-group input, .form-group select {
     width: 100%;
-    padding: 12px;
-    border: 1.5px solid #cbd5e1;
-    border-radius: 8px;
+    padding: 12px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
     font-size: 14px;
     box-sizing: border-box;
+    background-color: #f9fafb;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus, .form-group select:focus {
+    border-color: #10b981;
     background-color: #fff;
-    text-align: right;
+    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
+    outline: none;
 }
 
 .delivery-options {
     display: flex;
-    flex-direction: column;
-    gap: 10px;
+    gap: 20px;
+    background: #f3f4f6;
+    padding: 10px 14px;
+    border-radius: 10px;
 }
 
-.delivery-card {
-    display: flex;
-    align-items: center;
-    border: 1.5px solid #cbd5e1;
-    border-radius: 8px;
-    padding: 12px;
+.radio-label {
+    font-weight: normal !important;
+    font-size: 13px;
     cursor: pointer;
-    background-color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
 
-.delivery-card input[type="radio"] {
-    margin-left: 12px;
-    margin-right: 0;
-    accent-color: #10b981;
-    width: 18px;
-    height: 18px;
-    flex-shrink: 0;
+.order-summary {
+    background: #f8fafc;
+    border: 1px dashed #cbd5e1;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 20px 0;
 }
 
-.delivery-info {
+.summary-row {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    width: 100%;
+    margin-bottom: 8px;
     font-size: 14px;
-    font-weight: 600;
-    color: #0f172a;
+    color: #475569;
 }
 
-.delivery-text {
-    text-align: right;
-}
-
-.delivery-price {
-    color: #059669;
-    direction: ltr;
-    unicode-bidi: bidi-override;
-}
-
-.total-box {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #f1f5f9;
-    padding: 12px 15px;
-    border-radius: 8px;
-    font-size: 16px;
+.total-row {
     font-weight: bold;
     color: #0f172a;
-    margin-bottom: 15px;
-    border: 1px dashed #94a3b8;
+    font-size: 16px;
+    margin-top: 8px;
+    margin-bottom: 0;
 }
 
-#total-price {
-    color: #059669;
-    font-size: 18px;
-    direction: ltr;
-    unicode-bidi: bidi-override;
-}
-
-.submit-btn {
+/* تصميم الأزرار الاحترافية متعددة المواقع */
+.btn-confirm {
     width: 100%;
-    background-color: #10b981;
-    color: white;
     padding: 14px;
     border: none;
-    border-radius: 8px;
+    border-radius: 10px;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
-    transition: background 0.2s;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
 }
 
-.submit-btn:hover {
-    background-color: #059669;
+.top-btn {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: white;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.25);
+}
+
+.main-btn {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    margin-top: 10px;
+}
+
+.bottom-btn {
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    color: white;
+    margin-top: 15px;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
+}
+
+.btn-confirm:hover {
+    opacity: 0.95;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
 }
