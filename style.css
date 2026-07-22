@@ -71,6 +71,7 @@ body {
 
 .form-group {
     margin-bottom: 15px;
+    text-align: right;
 }
 
 .form-group label {
@@ -79,7 +80,6 @@ body {
     font-weight: bold;
     font-size: 14px;
     color: #334155;
-    text-align: right;
 }
 
 .form-group input, .form-group select {
@@ -90,6 +90,7 @@ body {
     font-size: 14px;
     box-sizing: border-box;
     background-color: #fff;
+    text-align: right;
 }
 
 .delivery-options {
@@ -106,25 +107,25 @@ body {
     padding: 12px;
     cursor: pointer;
     background-color: #fff;
-    direction: rtl;
 }
 
 .delivery-card input[type="radio"] {
-    margin-left: 10px;
+    margin-left: 12px;
     margin-right: 0;
     accent-color: #10b981;
     width: 18px;
     height: 18px;
+    flex-shrink: 0;
 }
 
 .delivery-info {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     width: 100%;
     font-size: 14px;
     font-weight: 600;
     color: #0f172a;
-    direction: rtl;
 }
 
 .delivery-text {
@@ -133,6 +134,8 @@ body {
 
 .delivery-price {
     color: #059669;
+    direction: ltr;
+    unicode-bidi: bidi-override;
 }
 
 .total-box {
@@ -147,12 +150,13 @@ body {
     color: #0f172a;
     margin-bottom: 15px;
     border: 1px dashed #94a3b8;
-    direction: rtl;
 }
 
 #total-price {
     color: #059669;
     font-size: 18px;
+    direction: ltr;
+    unicode-bidi: bidi-override;
 }
 
 .submit-btn {
