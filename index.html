@@ -1,331 +1,82 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EDWASS - متجرنا الإلكتروني</title>
-    <style>
-        body {
-            font-family: Tahoma, sans-serif;
-            background-color: #f8fafc;
-            margin: 0;
-            padding: 15px;
-            direction: rtl;
-            color: #1e293b;
-        }
+<div class="checkout-card">
+    <div class="checkout-header">
+        <h2>🔥 اطلب الآن ولا تفوت الفرصة!</h2>
+        <p>املأ المعلومات أدناه وسيتم الاتصال بك لتأكيد الطلب (الدفع عند الاستلام)</p>
+    </div>
 
-        .store-header {
-            background-color: #ffffff;
-            padding: 15px;
-            text-align: center;
-            border-radius: 12px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+    <!-- الزر الأول في الأعلى لتسريع عملية الطلب للعملاء المستعجلين -->
+    <button type="button" class="btn-confirm top-btn" onclick="scrollToForm()">
+        ⚡ اضغط هنا للطلب السريع
+    </button>
 
-        .store-header .logo {
-            font-size: 28px;
-            font-weight: 900;
-            color: #0f172a;
-            letter-spacing: 4px;
-            margin: 0;
-        }
-
-        .product, .order-section {
-            background: #fff;
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 15px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .product {
-            text-align: center;
-        }
-
-        .main-image {
-            width: 100%;
-            max-height: 350px;
-            object-fit: cover;
-            border-radius: 8px;
-        }
-
-        .gallery {
-            display: flex;
-            gap: 8px;
-            margin: 10px 0;
-            justify-content: center;
-        }
-
-        .gallery img {
-            width: 60px;
-            height: 60px;
-            object-fit: cover;
-            border-radius: 6px;
-            border: 1px solid #cbd5e1;
-        }
-
-        .order-section h2 {
-            font-size: 18px;
-            margin-bottom: 15px;
-            color: #0f172a;
-            text-align: right;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-            text-align: right;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            font-size: 14px;
-            color: #334155;
-        }
-
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 12px;
-            border: 1.5px solid #cbd5e1;
-            border-radius: 8px;
-            font-size: 14px;
-            box-sizing: border-box;
-            background-color: #fff;
-            text-align: right;
-        }
-
-        .delivery-options {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .delivery-card {
-            display: flex;
-            align-items: center;
-            border: 1.5px solid #cbd5e1;
-            border-radius: 8px;
-            padding: 12px;
-            cursor: pointer;
-            background-color: #fff;
-        }
-
-        .delivery-card input[type="radio"] {
-            margin-left: 12px;
-            margin-right: 0;
-            accent-color: #10b981;
-            width: 18px;
-            height: 18px;
-            flex-shrink: 0;
-        }
-
-        .delivery-info {
-            display: grid;
-            grid-template-columns: 1fr auto;
-            width: 100%;
-            align-items: center;
-            font-size: 14px;
-            font-weight: 600;
-            color: #0f172a;
-        }
-
-        .delivery-text {
-            text-align: right;
-        }
-
-        .delivery-price {
-            color: #059669;
-            text-align: left;
-            direction: ltr;
-        }
-
-        .total-box {
-            display: grid;
-            grid-template-columns: 1fr auto;
-            align-items: center;
-            background-color: #f1f5f9;
-            padding: 12px 15px;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: bold;
-            color: #0f172a;
-            margin-bottom: 15px;
-            border: 1px dashed #94a3b8;
-        }
-
-        #total-price {
-            color: #059669;
-            font-size: 18px;
-            text-align: left;
-            direction: ltr;
-        }
-
-        .submit-btn {
-            width: 100%;
-            background-color: #10b981;
-            color: white;
-            padding: 14px;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background 0.25s;
-        }
-
-        .submit-btn:hover {
-            background-color: #059669;
-        }
-    </style>
-</head>
-<body>
-
-    <!-- شعار المتجر في الأعلى -->
-    <header class="store-header">
-        <h1 class="logo">EDWASS</h1>
-    </header>
-
-    <section class="product">
-        <img src="images/photo_2025-12-13_23-10-19.jpg" alt="صورة المنتج الرئيسي" class="main-image">
-        
-        <div class="gallery">
-            <img src="images/photo_2025-12-13_23-10-19.jpg" alt="صورة 1">
-            <img src="images/photo_2025-12-13_23-10-27.jpg" alt="صورة 2">
-            <img src="images/photo_2025-12-13_23-10-32.jpg" alt="صورة 3">
-            <img src="images/photo_2025-12-13_23-17-36-42.jpg" alt="صورة 4">
+    <form id="orderForm" onsubmit="handleOrderSubmit(event)">
+        <div class="form-group">
+            <label>الاسم الكامل <span class="required">*</span></label>
+            <input type="text" id="fullName" placeholder="مثال: محمد أمين" required>
         </div>
 
-        <h2>مميزات المنتج</h2>
-        <p>اكتب هنا باختصار مميزات وفوائد هذا المنتج وكيف سيحل المشكلة للعميل.</p>
-        
-        <div class="prices">
-            <div class="price-box">
-                <span>السعر: 3500 دج</span>
+        <div class="form-group">
+            <label>رقم الهاتف <span class="required">*</span></label>
+            <input type="tel" id="phone" placeholder="05xxxxxxxx / 06xxxxxxxx / 07xxxxxxxx" required dir="ltr">
+        </div>
+
+        <div class="form-group">
+            <label>الولاية <span class="required">*</span></label>
+            <select id="wilaya" onchange="updateDeliveryOptions()" required>
+                <option value="">-- اختر الولاية --</option>
+                <option value="alger">16 - الجزائر</option>
+                <option value="oran">31 - وهران</option>
+                <option value="blida">09 - البليدة</option>
+                <option value="constantine">25 - قسنطينة</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>البلدية <span class="required">*</span></label>
+            <select id="baladiya" required>
+                <option value="">-- اختر الولاية أولاً --</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>طريقة التوصيل <span class="required">*</span></label>
+            <div class="delivery-options">
+                <label class="radio-label">
+                    <input type="radio" name="deliveryType" value="home" checked onchange="calculateTotal()"> 
+                    توصيل للمنزل (دوردور)
+                </label>
+                <label class="radio-label">
+                    <input type="radio" name="deliveryType" value="desk" onchange="calculateTotal()"> 
+                    توقيف المكتب (Stop Desk)
+                </label>
             </div>
         </div>
-    </section>
 
-    <section class="order-section" id="checkout">
-        <h2>أدخل معلوماتك لتأكيد الطلب</h2>
-        <form class="order-form">
-            <div class="form-group">
-                <label for="fullname">الاسم الكامل *</label>
-                <input type="text" id="fullname" name="fullname" placeholder="مثال: محمد أمين" required>
+        <!-- ملخص الفاتورة -->
+        <div class="order-summary">
+            <div class="summary-row">
+                <span>سعر المنتج:</span>
+                <span id="productPrice">2000</span> دج
             </div>
-            
-            <div class="form-group">
-                <label for="phone">رقم الهاتف *</label>
-                <input type="tel" id="phone" name="phone" placeholder="مثال: 0550000000" required>
+            <div class="summary-row">
+                <span>سعر التوصيل:</span>
+                <span id="shippingPrice">0</span> دج
             </div>
-            
-            <div class="form-group">
-                <label for="wilaya">الولاية *</label>
-                <select id="wilaya" name="wilaya" required>
-                    <option value="">-- اختر الولاية --</option>
-                    <option value="01">01 - أدرار</option>
-                    <option value="02">02 - الشلف</option>
-                    <option value="03">03 - الأغواط</option>
-                    <option value="04">04 - أم البواقي</option>
-                    <option value="05">05 - باتنة</option>
-                    <option value="06">06 - بجاية</option>
-                    <option value="07">07 - بسكرة</option>
-                    <option value="08">08 - بشار</option>
-                    <option value="09">09 - البليدة</option>
-                    <option value="10">10 - البويرة</option>
-                    <option value="11">11 - تمنراست</option>
-                    <option value="12">12 - تبسة</option>
-                    <option value="13">13 - تلمسان</option>
-                    <option value="14">14 - تيارت</option>
-                    <option value="15">15 - تيزي وزو</option>
-                    <option value="16">16 - الجزائر</option>
-                    <option value="17">17 - الجلفة</option>
-                    <option value="18">18 - جيجل</option>
-                    <option value="19">19 - سطيف</option>
-                    <option value="20">20 - سعيدة</option>
-                    <option value="21">21 - سكيكدة</option>
-                    <option value="22">22 - سيدي بلعباس</option>
-                    <option value="23">23 - عنابة</option>
-                    <option value="24">24 - قالمة</option>
-                    <option value="25">25 - قسنطينة</option>
-                    <option value="26">26 - المدية</option>
-                    <option value="27">27 - مستغانم</option>
-                    <option value="28">28 - المسيلة</option>
-                    <option value="29">29 - معسكر</option>
-                    <option value="30">30 - ورقلة</option>
-                    <option value="31">31 - وهران</option>
-                    <option value="32">32 - البيض</option>
-                    <option value="33">33 - إليزي</option>
-                    <option value="34">34 - برج بوعريريج</option>
-                    <option value="35">35 - بومرداس</option>
-                    <option value="36">36 - الطارف</option>
-                    <option value="37">37 - تندوف</option>
-                    <option value="38">38 - تيسمسيلت</option>
-                    <option value="39">39 - الوادي</option>
-                    <option value="40">40 - خنشلة</option>
-                    <option value="41">41 - سوق أهراس</option>
-                    <option value="42">42 - تيبازة</option>
-                    <option value="43">43 - ميلة</option>
-                    <option value="44">44 - عين الدفلى</option>
-                    <option value="45">45 - النعامة</option>
-                    <option value="46">46 - عين تموشنت</option>
-                    <option value="47">47 - غرداية</option>
-                    <option value="48">48 - غليزان</option>
-                    <option value="49">49 - المغير</option>
-                    <option value="50">50 - المنيعة</option>
-                    <option value="51">51 - أولاد جلال</option>
-                    <option value="52">52 - برج باجي مختار</option>
-                    <option value="53">53 - بني عباس</option>
-                    <option value="54">54 - تيميمون</option>
-                    <option value="55">55 - تقرت</option>
-                    <option value="56">56 - جانت</option>
-                    <option value="57">57 - عين صالح</option>
-                    <option value="58">58 - إن قزام</option>
-                </select>
+            <hr>
+            <div class="summary-row total-row">
+                <span>المجموع الكلي:</span>
+                <span id="totalPrice">2000</span> دج
             </div>
+        </div>
 
-            <div class="form-group">
-                <label for="address">العنوان التفصيلي (البلدية والحي) *</label>
-                <input type="text" id="address" name="address" placeholder="أدخل العنوان بالتفصيل" required>
-            </div>
+        <!-- الزر الثاني (الرئيسي) لتأكيد الطلب -->
+        <button type="submit" class="btn-confirm main-btn">
+            🛒 تأكيد الطلبية الآن (الدفع عند الاستلام)
+        </button>
+    </form>
 
-            <!-- خيارات التوصيل -->
-            <div class="form-group">
-                <label>طريقة التوصيل *</label>
-                <div class="delivery-options">
-                    <label class="delivery-card">
-                        <input type="radio" name="delivery_type" value="home" checked>
-                        <div class="delivery-info">
-                            <span class="delivery-text">توصيل للمنزل (الدايركشن)</span>
-                            <span class="delivery-price">600 دج</span>
-                        </div>
-                    </label>
-                    <label class="delivery-card">
-                        <input type="radio" name="delivery_type" value="desk">
-                        <div class="delivery-info">
-                            <span class="delivery-text">توصيل للمكتب (Stop Desk)</span>
-                            <span class="delivery-price">400 دج</span>
-                        </div>
-                    </label>
-                </div>
-            </div>
-
-            <!-- عرض السعر الإجمالي -->
-            <div class="total-box">
-                <span>المجموع الإجمالي:</span>
-                <span id="total-price">4100 دج</span>
-            </div>
-            
-            <button type="submit" class="submit-btn">تأكيد طلب المنتج 🛒</button>
-        </form>
-    </section>
-
-</body>
-</html>
+    <!-- الزر الثالث في الأسفل لتعزيز معدل التحويل -->
+    <button type="button" class="btn-confirm bottom-btn" onclick="scrollToForm()">
+        ✨ أكد طلبك واستفد من التوصيل السريع
+    </button>
+</div>
