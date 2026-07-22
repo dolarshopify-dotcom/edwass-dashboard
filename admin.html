@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لوحة التحكم - Edwass Admin</title>
+    <title>IDWASS - لوحة التحكم</title>
     <style>
-        body { font-family: Tahoma, sans-serif; background: #f0f2f5; margin: 0; padding: 20px; direction: rtl; color: #333; }
-        .container { max-width: 1000px; margin: auto; background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        h2 { color: #1e293b; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; margin-top: 0; }
+        body { font-family: Tahoma, sans-serif; background: #f8fafc; margin: 0; padding: 20px; direction: rtl; color: #1e293b; }
+        .container { max-width: 1050px; margin: auto; background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        h2 { color: #0f172a; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; margin-top: 0; }
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .form-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; font-weight: bold; font-size: 14px; color: #475569; }
+        .form-group { margin-bottom: 15px; text-align: right; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; font-size: 14px; color: #334155; }
         input { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; box-sizing: border-box; font-size: 14px; }
-        .btn-save { background: #0f172a; color: white; border: none; padding: 12px 20px; border-radius: 6px; cursor: pointer; font-size: 16px; font-weight: bold; width: 100%; transition: background 0.2s; }
-        .btn-save:hover { background: #334155; }
+        .btn-save { background: #10b981; color: white; border: none; padding: 12px 20px; border-radius: 6px; cursor: pointer; font-size: 16px; font-weight: bold; width: 100%; transition: background 0.2s; }
+        .btn-save:hover { background: #059669; }
         
         table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 13px; }
         th, td { border: 1px solid #e2e8f0; padding: 10px; text-align: center; }
-        th { background: #f8fafc; color: #1e293b; }
+        th { background: #f1f5f9; color: #0f172a; }
         
         .badge { padding: 4px 8px; border-radius: 4px; font-weight: bold; display: inline-block; }
         .badge-جديد { background: #f1f5f9; color: #475569; }
@@ -40,7 +40,8 @@
 <div class="container">
     <div id="alert" class="alert-box">تم حفظ التغييرات بنجاح!</div>
     
-    <h2>⚙️ إعدادات المتجر الأساسية</h2>
+    <!-- قسم الإعدادات في الأعلى -->
+    <h2>⚙️ IDWASS - إعدادات المتجر الأساسية</h2>
     <form id="admin-form">
         <div class="grid">
             <div class="form-group">
@@ -60,9 +61,10 @@
                 <input type="number" id="p-desk" required>
             </div>
         </div>
-        <button type="submit" class="btn-save">حفظ الإعدادات وتحديث المتجر</button>
+        <button type="submit" class="btn-save">حفظ التغييرات</button>
     </form>
 
+    <!-- قسم الطلبات في الأسفل -->
     <h2 style="margin-top: 40px;">📦 إدارة الطلبات الواردة (<span id="orders-count">0</span>)</h2>
     <table>
         <thead>
@@ -74,7 +76,7 @@
                 <th>التوصيل</th>
                 <th>المجموع</th>
                 <th>الحالة</th>
-                <th>إجراءات التغيير</th>
+                <th>تأكيد الطلبية (إجراءات)</th>
             </tr>
         </thead>
         <tbody id="orders-body">
@@ -84,7 +86,6 @@
 </div>
 
 <script>
-    // جلب أو تعيين الإعدادات الافتراضية
     const defaultSettings = {
         productName: "EDWASS - Hoodie Pro",
         productPrice: 3500,
@@ -94,13 +95,11 @@
 
     let settings = JSON.parse(localStorage.getItem('store_settings')) || defaultSettings;
 
-    // تعبئة الحقول بالقيم الحالية
     document.getElementById('p-name').value = settings.productName;
     document.getElementById('p-price').value = settings.productPrice;
     document.getElementById('p-home').value = settings.homeDeliveryPrice;
     document.getElementById('p-desk').value = settings.stopDeskPrice;
 
-    // حفظ التغييرات عند الضغط على الزر دون إعادة تحميل عنيفة للصفحة
     document.getElementById('admin-form').addEventListener('submit', function(e) {
         e.preventDefault();
         
@@ -116,7 +115,6 @@
         setTimeout(() => { alertBox.style.display = 'none'; }, 3000);
     });
 
-    // عرض وتعبئة جدول الطلبات
     function loadOrders() {
         let orders = JSON.parse(localStorage.getItem('store_orders')) || [];
         document.getElementById('orders-count').innerText = orders.length;
@@ -152,7 +150,6 @@
         });
     }
 
-    // تغيير حالة الطلب
     function changeStatus(id, newStatus) {
         let orders = JSON.parse(localStorage.getItem('store_orders')) || [];
         let order = orders.find(o => o.id === id);
