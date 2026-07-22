@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>لوحة تحكم المتجر - Edwass Admin</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { background: #f4f6f8; font-family: Tahoma, sans-serif; padding: 20px; }
+        .admin-container { max-width: 900px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h2 { color: #333; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; }
+        button { background: #2f855a; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-size: 16px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: center; }
+        th { background: #edf2f7; }
+    </style>
+</head>
+<body>
+
+<div class="admin-container">
+    <h2>⚙️ إعدادات المتجر (Shopify Style)</h2>
+    <form id="settings-form">
+        <div class="form-group">
+            <label>اسم المنتج:</label>
+            <input type="text" id="admin-name">
+        </div>
+        <div class="form-group">
+            <label>سعر المنتج (دج):</label>
+            <input type="number" id="admin-price">
+        </div>
+        <div class="form-group">
+            <label>سعر توصيل المنزل (دج):</label>
+            <input type="number" id="admin-home">
+        </div>
+        <div class="form-group">
+            <label>سعر توصيل المكتب Stop Desk (دج):</label>
+            <input type="number" id="admin-stop">
+        </div>
+        <button type="submit">حفظ التغييرات</button>
+    </form>
+
+    <h2 style="margin-top: 40px;">📦 الطلبات الواردة (<span id="orders-count">0</span>)</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>التاريخ</th>
+                <th>الاسم</th>
+                <th>الهاتف</th>
+                <th>الولاية</th>
+                <th>التوصيل</th>
+                <th>المجموع</th>
+            </tr>
+        </thead>
+        <tbody id="orders-table-body">
+            <!-- سيتم تعبئة الطلبات تلقائياً -->
+        </tbody>
+    </table>
+</div>
+
+<script>
+    // تحميل الإعدادات الحالية في الحقول
+    let settings = JSON.parse(localStorage.getItem('store_settings')) || {
+        productName: "EDWASS - Hoodie Pro",
+        productPrice: 4100,
+        homeDeliveryPrice: 600,
+        stopDeskPrice: 400
+    };
+
+    document.getElementById('admin-name').value = settings.productName;
+    document.getElementById('admin-price').value = settings.productPrice;
+    document.getElementById('admin-home').value = settings.homeDeliveryPrice;
+    document.getElementById('admin-stop').value = settings.stopDeskPrice;
+
+    // حفظ الإعدادات الجديدة
+    document.getElementById('settings-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        settings.productName = document.getElementById('admin-name').value;
+        settings.price = Number(document.getElementById('admin-price').value);
+        settings.homeDeliveryPrice = Number(document.getElementById('admin-home').value);
+        settings.stopDeskPrice = Number(document.getElementById('admin-stop').value);
+        
+        localStorage.setItem('store_settings', JSON.stringify(settings));
+        alert("تم حفظ الإعدادات بنجاح!");
+    });
+
+    // عرض الطلبات
+    let orders = JSON.parse(localStorage.getItem('store_orders')) || [];
+    document.getElementById('orders-count').innerText = orders.length;
+    let tbody = document.getElementById('orders-table-body');
+    
+    orders.forEach(ord => {
+        let tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td>${ord.date}</td>
+            <td>${ord.name}</td>
+            <td>${ord.phone}</td>
+            <td>${ord.wilaya}</td>
+            <td>${ord.deliveryType}</td>
+            <td><b>${ord.total}</b></td>
+        `;
+        tbody.appendChild(tr);
+    });
+</script>
+
+</body>
+</html>
