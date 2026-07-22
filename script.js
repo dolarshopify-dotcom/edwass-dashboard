@@ -1,93 +1,67 @@
-// جلب الإعدادات المحفوظة من لوحة التحكم أو استخدام القيم الافتراضية
-const defaultSettings = {
-    productName: "EDWASS - Hoodie Pro",
-    productPrice: 3000,
-    homeDeliveryPrice: 400,
-    stopDeskPrice: 200
+// أسعار التوصيل والبلديات لكل ولاية (يمكنك تعديلها حسب رغبتك)
+const deliveryData = {
+    "alger": { home: 500, desk: 300, baladiyas: ["الجزائر الوسطى", "سيدي أمحمد", "باب الوادي", "بوزريعة", "الدار البيضاء"] },
+    "oran": { home: 600, desk: 400, baladiyas: ["وهران", "السانية", "بئر الجير", "أرزيو"] },
+    "blida": { home: 400, desk: 250, baladiyas: ["البليدة", "بوفاريك", "العريشة", "الصومعة"] },
+    "constantine": { home: 600, desk: 400, baladiyas: ["قسنطينة", "الخروب", "حامة بوزيان"] }
 };
 
-let settings = JSON.parse(localStorage.getItem('store_settings')) || defaultSettings;
+const baseProductPrice = 2000; // قم بتغيير هذا إلى سعر منتجك الحقيقي
 
-document.addEventListener("DOMContentLoaded", () => {
-    // 1. تحديث اسم السلعة والسعر في الصفحة الرئيسية إذا توفرت العناصر
-    const titleEl = document.querySelector("h1, h2, .product-title");
-    if(titleEl && settings.productName) {
-        titleEl.innerText = settings.productName;
-    }
-
-    // عرض سعر المنتج الأساسي
-    const priceEl = document.querySelector(".product-price");
-    if(priceEl) {
-        priceEl.innerText = settings.productPrice + " دج";
-    }
-
-    // تحديث أسعار الشحن المكتوبة بجانب خيارات التوصيل (إن وجدت)
-    const homeText = document.querySelector(".home-delivery-text");
-    if(homeText) homeText.innerText = settings.homeDeliveryPrice + " دج";
-
-    const stopText = document.querySelector(".stop-desk-text");
-    if(stopText) stopText.innerText = settings.stopDeskPrice + " دج";
-
-    // حساب المجموع لأول مرة
-    updateTotal();
-
-    // مراقبة تغيير خيار التوصيل لتحديث المجموع فوراً
-    const deliveryInputs = document.querySelectorAll('input[name="delivery"]');
-    deliveryInputs.forEach(input => {
-        input.addEventListener('change', updateTotal);
-    });
-
-    // ربط نموذج الطلب بزر التأكيد
-    const orderForm = document.querySelector('form');
-    if(orderForm && !orderForm.id.includes('settings')) {
-        orderForm.addEventListener('submit', submitOrder);
-    }
-});
-
-// دالة حساب المجموع الإجمالي ديناميكياً
-function updateTotal() {
-    const deliveryType = document.querySelector('input[name="delivery"]:checked');
-    let deliveryCost = settings.homeDeliveryPrice; // الافتراضي توصيل منزل
+function updateDeliveryOptions() {
+    const wilayaSelect = document.getElementById("wilaya");
+    const baladiyaSelect = document.getElementById("baladiya");
     
-    if (deliveryType) {
-        // إذا كان الخيار الثاني أو يحتوي على قيمة مكتب
-        if (deliveryType.value === 'stop_desk' || deliveryType.parentElement.innerText.includes('مكتب') || deliveryType.id.includes('stop')) {
-            deliveryCost = settings.stopDeskPrice;
-        }
-    }
+    const selectedWilaya = wilayaSelect.value;
     
-    const total = Number(settings.productPrice) + Number(deliveryCost);
-    const totalEl = document.querySelector(".total-price");
-    if(totalEl) {
-        totalEl.innerText = total + " دح";
+    // إعادة تعيين البلديات
+    baladiyaSelect.innerHTML = '<option value="">-- اختر البلدية --</option>';
+    
+    if (selectedWilaya && deliveryData[selectedWilaya]) {
+        deliveryData[selectedWilaya].baladiyas.forEach(baladiya => {
+            const option = document.createElement("option");
+            option.value = baladiya;
+            option.textContent = baladiya;
+            baladiyaSelect.appendChild(option);
+        });
     }
+    calculateTotal();
 }
 
-// دالة تسجيل الطلب وإرساله للوحة التحكم
-function submitOrder(event) {
-    event.preventDefault();
+function calculateTotal() {
+    const wilaya = document.getElementById("wilaya").value;
+    const deliveryType = document.querySelector('input[name="deliveryType"]:checked').value;
     
-    const nameInput = document.getElementById('customer-name') || document.querySelector('input[name="name"]');
-    const phoneInput = document.getElementById('customer-phone') || document.querySelector('input[name="phone"]');
-    const wilayaInput = document.getElementById('customer-wilaya') || document.querySelector('select');
-    const addressInput = document.getElementById('customer-address') || document.querySelector('input[name="address"]');
-    const deliveryType = document.querySelector('input[name="delivery"]:checked');
+    let shippingPrice = 0;
+    
+    if (wilaya && deliveryData[wilaya]) {
+        shippingPrice = deliveryData[wilaya][deliveryType];
+    }
+    
+    document.getElementById("productPrice").textContent = baseProductPrice;
+    document.getElementById("shippingPrice").textContent = shippingPrice;
+    document.getElementById("totalPrice").textContent = baseProductPrice + shippingPrice;
+}
 
-    const order = {
-        id: Date.now(),
-        name: nameInput ? nameInput.value : "غير محدد",
-        phone: phoneInput ? phoneInput.value : "غير محدد",
-        wilaya: wilayaInput ? wilayaInput.value : "غير محدد",
-        address: addressInput ? addressInput.value : "غير محدد",
-        deliveryType: deliveryType ? deliveryType.parentElement.innerText : "توصيل منزل",
-        total: document.querySelector(".total-price") ? document.querySelector(".total-price").innerText : settings.productPrice + " دح",
-        date: new Date().toLocaleDateString('ar-DZ') + ' ' + new Date().toLocaleTimeString()
-    };
+function scrollToForm() {
+    document.getElementById("orderForm").scrollIntoView({ behavior: 'smooth' });
+}
 
-    let orders = JSON.parse(localStorage.getItem('store_orders')) || [];
-    orders.unshift(order);
-    localStorage.setItem('store_orders', JSON.stringify(orders));
+function handleOrderSubmit(event) {
+    event.preventDefault();
+    const name = document.getElementById("fullName").value;
+    const phone = document.getElementById("phone").value;
+    const wilaya = document.getElementById("wilaya").options[document.getElementById("wilaya").selectedIndex].text;
+    const baladiya = document.getElementById("baladiya").value;
+    const total = document.getElementById("totalPrice").textContent;
 
-    alert("تم تأكيد طلبك بنجاح! شكراً لك.");
-    window.location.reload();
+    if (!name || !phone || !wilaya || !baladiya) {
+        alert("الرجاء ملء جميع الحقول الإجبارية!");
+        return;
+    }
+
+    // رسالة نجاح مؤقتة (يمكنك ربطها بـ Backend أو تخزينها محلياً كما ترغب)
+    alert(🎉 مبروك يا ${name}! تم تسجيل طلبك بنجاح بمبلغ ${total} دج نحو ولاية ${wilaya}. سنتصل بك قريباً للتأكيد.);
+    document.getElementById("orderForm").reset();
+    calculateTotal();
 }
