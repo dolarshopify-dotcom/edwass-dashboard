@@ -31,7 +31,25 @@
     <button>أضف إلى السلة</button>
   </div>
 </main>
+<form id="orderForm">
+    <input type="text" placeholder="الاسم الكامل" required>
+    <input type="tel" placeholder="رقم الهاتف" required>
 
+    <select id="wilaya" required>
+        <option value="">اختر الولاية</option>
+        <option value="الجزائر">الجزائر</option>
+        <option value="وهران">وهران</option>
+        <option value="سطيف">سطيف</option>
+        <option value="قسنطينة">قسنطينة</option>
+    </select>
+
+    <input type="text" placeholder="البلدية" required>
+    <input type="text" placeholder="العنوان الكامل" required>
+
+    <p>سعر التوصيل: <span id="deliveryPrice">0</span> دج</p>
+
+    <button type="submit">تأكيد الطلب</button>
+</form>
 <script src="script.js"></script>
 
 </body>
