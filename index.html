@@ -82,25 +82,31 @@
                 <input type="text" id="address" name="address" placeholder="أدخل العنوان بالتفصيل" required>
             </div>
 
-            <!-- خيارات التوصيل -->
+           <!-- خيارات التوصيل -->
             <div class="form-group">
                 <label>طريقة التوصيل *</label>
                 <div class="delivery-options">
                     <label class="delivery-card">
                         <input type="radio" name="delivery_type" value="home" checked>
                         <div class="delivery-info">
-                            <span>توصيل للمنزل (الدايركشن)</span>
+                            <span class="delivery-text">توصيل للمنزل (الدايركشن)</span>
                             <span class="delivery-price">600 دج</span>
                         </div>
                     </label>
                     <label class="delivery-card">
                         <input type="radio" name="delivery_type" value="desk">
                         <div class="delivery-info">
-                            <span>توصيل للمكتب (Stop Desk)</span>
+                            <span class="delivery-text">توصيل للمكتب (Stop Desk)</span>
                             <span class="delivery-price">400 دج</span>
                         </div>
                     </label>
                 </div>
+            </div>
+
+            <!-- عرض السعر الإجمالي -->
+            <div class="total-box">
+                <span>المجموع الإجمالي:</span>
+                <span id="total-price">4100 دج</span>
             </div>
 
             <!-- عرض السعر الإجمالي -->
